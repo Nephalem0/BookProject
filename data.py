@@ -2,12 +2,13 @@ from sqlalchemy import Column
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
 from sqlalchemy import String
+from sqlalchemy import DateTime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
-engine = create_engine("sqlite://books.db", echo=True, future=True)
+engine = create_engine("sqlite:///books.db", echo=True, future=True)
 
 Base = declarative_base()
 
@@ -17,7 +18,7 @@ class Books(Base):
     name = Column(String(30), nullable=False)
     author = Column(String, nullable=False)
     year_published = Column(Integer, nullable=False)
-    type = Column(Integer(1), nullable=False)
+    type = Column(Integer(), nullable=False)
 
     def __repr__(self):
         return f"books(id={self.id!r}, name={self.name!r}, author={self.author!r}, year_published={self.year_published!r}, type={self.type!r})"
@@ -43,7 +44,7 @@ class Loans(Base):
 
     custID = Column(Integer, ForeignKey("Books.id"), nullable=False)
     bookID = Column(Integer, ForeignKey("Customers.id"), nullable=False)
-    loandtate = Column(datetime.now())
+    loandtate = Column(DateTime, datetime.now(), nullable=False)
     returndate = Column(BookSelect(Integer))
     def __repr__(self):
         return f"loans(id={self.custID!r}, name={self.bookID!r}, city={self.loandtate!r}, age={self.returndate!r})"
