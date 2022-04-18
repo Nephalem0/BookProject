@@ -1,59 +1,57 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-
-engine = create_engine('sqlite:///BookStore.db', echo=True)
-session = sessionmaker(bind=engine)()
+from sqlalchemy import Column
+from sqlalchemy import ForeignKey
+from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import relationship
+from sqlalchemy.orm import Session
+import datetime
+engine = create_engine("sqlite://", echo=True, future=True)
 
 Base = declarative_base()
 
-
 class Books(Base):
-    __tablename__ = "Books"
+    __tablename__ = "books"
+    id = Column(Integer, primary_key=True, nullable=False)
+    name = Column(String(30), nullable=False)
+    author = Column(String, nullable=False)
+    year_published = Column(Integer, nullable=False)
+    type = Column(Integer(1), nullable=False)
 
-    ID = Column('ID', Integer, primary_key=True)
-    Name = Column('Name', String)
-    Author = Column('Author', String)
-    Year_Published = Column('Year_Published', Integer)
-    Type = Column('Type', Integer)
-
-    def __init__(self, ID, Name, Author, Year_Published, Type):
-        self.ID = ID
-        self.Name = Name
-        self.Author = Author
-        self.Year_Published = Year_Published
-        self.Type = Type
-
+    def __repr__(self):
+        return f"books(id={self.id!r}, name={self.name!r}, author={self.author!r}, year_published={self.year_published!r}, type={self.type!r})"
 
 class Customers(Base):
-    __tablename__ = "Costumers"
-
-    ID = Column('ID', Integer, primary_key=True)
-    Name = Column('Name', String)
-    City = Column('City', String)
-    Age = Column('Age', Integer)
-
-    def __init__(self, ID, Name, City, Age):
-        self.ID = ID
-        self.Name = Name
-        self.City = City
-        self.Age = Age
-
+    __tablename__ = "customers"
+    id = Column(Integer, primary_key=True, nullable=False)
+    name = Column(String, nullable=False)
+    city = Column(String, nullable=False)
+    age = Column(String, nullable=False)
+    def __repr__(self):
+        return f"customers(id={self.id!r}, name={self.name!r}, city={self.city!r}, age={self.age!r})"
 
 class Loans(Base):
-    __tablename__ = "Loans"
+    custID = Column(Integer, ForeignKey("Books.id"), nullable=False)
+    bookID = Column(Integer, ForeignKey("Customers.id"), nullable=False)
+    loandtate = Column(datetime.utcnow)
 
-    CustID = Column('CustID', Integer, primary_key=True)
-    BookID = Column('BookID', Integer)
-    Loandate = Column('Loandate', Integer)
-    ReturnDate = Column('ReturnDate', Integer)
+Base.metadata.create_all(engine)
 
-    def __init__(self, CustID, BookID, Loandate, ReturnDate):
-        self.CustID = CustID
-        self.BookID = BookID
-        self.Loandate = Loandate
-        self.ReturnDate = ReturnDate
-
-books = Books(1, "James", "adam", 1515, 1)
-session.add(books)
-session.commit()
+with Session(engine) as session:
+    spongebob = User(
+        name="spongebob",
+        author="Spongebob Squarepants",
+        addresses=[Address(email_address="spongebob@sqlalchemy.org")],
+    )
+    sandy = User(
+        name="sandy",
+        author="Sandy Cheeks",
+        addresses=[
+            Address(email_address="sandy@sqlalchemy.org"),
+            Address(email_address="sandy@squirrelpower.org"),
+        ],
+    )
+    patrick = User(name="patrick", author="Patrick Star")
+    session.add_all([spongebob, sandy, patrick])
+    session.commit()
