@@ -61,3 +61,23 @@ def AddBook(id, name, author, year_published, type):
         )
         session.add_all([newbook])
         session.commit()
+
+def AddCustomer(id, name, city, age):
+    with Session(engine) as session:
+        newcustomer = Customers(
+            id = id,
+            name = name,
+            city = city,
+            age = age,
+        )
+        session.add_all([newcustomer])
+        session.commit()
+
+def AddLoan(custID, bookID):
+    with Session(engine) as session:
+        newloan = Loans(
+            custID = custID,
+            bookID = bookID
+        )
+        session.add_all([newloan])
+        session.commit()
