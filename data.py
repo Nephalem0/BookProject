@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import Session
-import datetime
+from datetime import datetime, timedelta
 engine = create_engine("sqlite://", echo=True, future=True)
 
 Base = declarative_base()
@@ -32,9 +32,20 @@ class Customers(Base):
         return f"customers(id={self.id!r}, name={self.name!r}, city={self.city!r}, age={self.age!r})"
 
 class Loans(Base):
+    __tablename__ = "loans"
+    if Books.type == 1:
+        data = datetime.now() + timedelta(days=10) 
+    if Books.type == 2:
+        data = datetime.now() + timedelta(days=5)
+    if Books.type == 3:
+        data = datetime.now() + timedelta(days=2)
+
     custID = Column(Integer, ForeignKey("Books.id"), nullable=False)
     bookID = Column(Integer, ForeignKey("Customers.id"), nullable=False)
-    loandtate = Column(datetime.utcnow)
+    loandtate = Column(datetime.now())
+    returndate = Column(data)
+    def __repr__(self):
+        return f"loans(id={self.custID!r}, name={self.bookID!r}, city={self.loandtate!r}, age={self.returndate!r})"
 
 Base.metadata.create_all(engine)
 
