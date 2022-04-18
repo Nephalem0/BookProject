@@ -50,15 +50,14 @@ class Loans(Base):
 
 Base.metadata.create_all(engine)
 
-with Session(engine) as session:
-    def AddBook():
-        pass
-
-    newbook = Books(
-        name="spongebob",
-        author="Spongebob Squarepants",
-        addresses=[Address(email_address="spongebob@sqlalchemy.org")],
-    )
-
-    session.add_all([newbook])
-    session.commit()
+def AddBook(id, name, author, year_published, type):
+    with Session(engine) as session:
+        newbook = Books(
+            id = id,
+            name = name,
+            author = author,
+            year_published = year_published,
+            type = type
+        )
+        session.add_all([newbook])
+        session.commit()
