@@ -45,6 +45,7 @@ class Loans(Base):
     bookID = Column(Integer, ForeignKey("customers.id"),primary_key=True, nullable=False)
     loandtate = Column(DateTime, onupdate=datetime.now, nullable=False)
     returndate = Column(DateTime, BookSelect(Integer))
+    #check later
     def __repr__(self):
         return f"loans(id={self.custID!r}, name={self.bookID!r}, city={self.loandtate!r}, age={self.returndate!r})"
 
