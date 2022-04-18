@@ -7,7 +7,7 @@ from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
-engine = create_engine("sqlite://", echo=True, future=True)
+engine = create_engine("sqlite://books.db", echo=True, future=True)
 
 Base = declarative_base()
 
@@ -33,36 +33,32 @@ class Customers(Base):
 
 class Loans(Base):
     __tablename__ = "loans"
-    if Books.type == 1:
-        data = datetime.now() + timedelta(days=10) 
-    if Books.type == 2:
-        data = datetime.now() + timedelta(days=5)
-    if Books.type == 3:
-        data = datetime.now() + timedelta(days=2)
+    def BookSelect(type):
+        if type == 1:
+            return datetime.now() + timedelta(days=10) 
+        elif type == 2:
+            return datetime.now() + timedelta(days=5)
+        elif type == 3:
+            return datetime.now() + timedelta(days=2)
 
     custID = Column(Integer, ForeignKey("Books.id"), nullable=False)
     bookID = Column(Integer, ForeignKey("Customers.id"), nullable=False)
     loandtate = Column(datetime.now())
-    returndate = Column(data)
+    returndate = Column(BookSelect(Integer))
     def __repr__(self):
         return f"loans(id={self.custID!r}, name={self.bookID!r}, city={self.loandtate!r}, age={self.returndate!r})"
 
 Base.metadata.create_all(engine)
 
 with Session(engine) as session:
-    spongebob = User(
+    def AddBook():
+        pass
+
+    newbook = Books(
         name="spongebob",
         author="Spongebob Squarepants",
         addresses=[Address(email_address="spongebob@sqlalchemy.org")],
     )
-    sandy = User(
-        name="sandy",
-        author="Sandy Cheeks",
-        addresses=[
-            Address(email_address="sandy@sqlalchemy.org"),
-            Address(email_address="sandy@squirrelpower.org"),
-        ],
-    )
-    patrick = User(name="patrick", author="Patrick Star")
-    session.add_all([spongebob, sandy, patrick])
+
+    session.add_all([newbook])
     session.commit()
