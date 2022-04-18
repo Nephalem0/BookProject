@@ -5,7 +5,6 @@ from sqlalchemy import String
 from sqlalchemy import DateTime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import relationship
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
 engine = create_engine("sqlite:///books.db", echo=True, future=True)
@@ -44,7 +43,7 @@ class Loans(Base):
 
     custID = Column(Integer, ForeignKey("Books.id"), nullable=False)
     bookID = Column(Integer, ForeignKey("Customers.id"), nullable=False)
-    loandtate = Column(DateTime, datetime.now(), nullable=False)
+    loandtate = Column(DateTime, onupdate=datetime.now, nullable=False)
     returndate = Column(BookSelect(Integer))
     def __repr__(self):
         return f"loans(id={self.custID!r}, name={self.bookID!r}, city={self.loandtate!r}, age={self.returndate!r})"
