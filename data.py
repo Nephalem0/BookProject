@@ -21,7 +21,7 @@ class Books(Base):
 
     def __repr__(self):
         return f"books(id={self.id!r}, name={self.name!r}, author={self.author!r}, year_published={self.year_published!r}, type={self.type!r})"
-
+# REMEMBER TO CHECK HOW TO DO THIS WITHOUT A PRIMARY KEY!!!!!!
 class Customers(Base):
     __tablename__ = "customers"
     id = Column(Integer, primary_key=True, nullable=False)
@@ -41,8 +41,8 @@ class Loans(Base):
         elif type == 3:
             return datetime.now() + timedelta(days=2)
 
-    custID = Column(Integer, ForeignKey("Books.id"), nullable=False)
-    bookID = Column(Integer, ForeignKey("Customers.id"), nullable=False)
+    custID = Column(Integer, ForeignKey("Books.id"),primary_key=True, nullable=False)
+    bookID = Column(Integer, ForeignKey("Customers.id"),primary_key=True, nullable=False)
     loandtate = Column(DateTime, onupdate=datetime.now, nullable=False)
     returndate = Column(BookSelect(Integer))
     def __repr__(self):
