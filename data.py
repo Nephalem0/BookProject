@@ -41,10 +41,10 @@ class Loans(Base):
         elif type == 3:
             return datetime.now() + timedelta(days=2)
 
-    custID = Column(Integer, ForeignKey("Books.id"),primary_key=True, nullable=False)
-    bookID = Column(Integer, ForeignKey("Customers.id"),primary_key=True, nullable=False)
+    custID = Column(Integer, ForeignKey("books.id"),primary_key=True, nullable=False)
+    bookID = Column(Integer, ForeignKey("customers.id"),primary_key=True, nullable=False)
     loandtate = Column(DateTime, onupdate=datetime.now, nullable=False)
-    returndate = Column(BookSelect(Integer))
+    returndate = Column(DateTime, BookSelect(Integer))
     def __repr__(self):
         return f"loans(id={self.custID!r}, name={self.bookID!r}, city={self.loandtate!r}, age={self.returndate!r})"
 
