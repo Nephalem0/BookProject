@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Add Book</title>
+{% endblock %}
+
+{% block body %}
+<h1>Please Add The Book Information</h1>
+<div class="form">
+    <form action="/" method="POST">
+        <input type="text" name="id" id="id">
+        <input type="submit" value="Add ID">
+    </form>
+    <br>
+    <form action="/" method="POST">
+        <input type="text" name="name" id="name">
+        <input type="submit" value="Add Book Name">
+    </form>
+    <br>
+    <form action="/" method="POST">
+        <input type="text" name="Author" id="Author">
+        <input type="submit" value="Add Author">
+    </form>
+    <br>
+    <form action="/" method="POST">
+        <input type="text" name="year_published" id="year_published">
+        <input type="submit" value="Add Year Published">
+    </form>
+    <br>
+    <form action="/" method="POST">
+        <input type="text" name="type" id="type">
+        <input type="submit" value="Add Type">
+    </form>
+</div>
+{% endblock %}

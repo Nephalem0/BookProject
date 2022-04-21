@@ -5,14 +5,14 @@ import loans
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def index():
     return render_template('index.html')
 
 
-@app.route('/add')
+@app.route('/addbook', methods=['POST', 'GET'])
 def add():
-    return render_template('add.html')
+    return render_template('addbook.html')
 
 
 if __name__ == "__main__":
