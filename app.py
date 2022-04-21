@@ -12,7 +12,7 @@ def index():
 
 
 @app.route('/addbook', methods=['POST', 'GET'])
-def add():
+def addAbook():
     if request.method == 'POST':
         book_id = int(request.form['id'])
         book_name = str(request.form['name'])
@@ -25,7 +25,6 @@ def add():
             return redirect('/')
 
         except:
-            allbooks = books.Books.order_by
             return 'There was an issue adding your book'
 
 
