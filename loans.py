@@ -6,10 +6,14 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
+from books import Books
+from customers import Customers
 engine = create_engine("sqlite:///books.db", echo=True, future=True)
 
 Base = declarative_base()
 
+books = Books.id
+customers = Customers.id
 
 class Loans(Base):
     __tablename__ = "loans"
