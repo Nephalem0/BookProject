@@ -1,5 +1,7 @@
 from flask import Flask, render_template, url_for
-
+import books
+import customers
+import loans
 
 app = Flask(__name__)
 

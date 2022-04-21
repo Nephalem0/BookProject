@@ -25,9 +25,9 @@ class Loans(Base):
     books = Books.id
     customers = Customers.id
 # REMEMBER TO CHECK HOW TO DO THIS WITHOUT A PRIMARY KEY!!!!!!
-    custID = Column(Integer, ForeignKey("books"),
+    custID = Column(Integer, ForeignKey(Books.id),
                     primary_key=True, nullable=False)
-    bookID = Column(Integer, ForeignKey("customers.id"),
+    bookID = Column(Integer, ForeignKey(Customers.id),
                     primary_key=True, nullable=False)
     loandtate = Column(DateTime, onupdate=datetime.now, nullable=False)
     returndate = Column(DateTime, BookSelect(Integer))
