@@ -12,9 +12,6 @@ engine = create_engine("sqlite:///books.db", echo=True, future=True)
 
 Base = declarative_base()
 
-books = Books.id
-customers = Customers.id
-
 class Loans(Base):
     __tablename__ = "loans"
 
@@ -25,8 +22,10 @@ class Loans(Base):
             return datetime.now() + timedelta(days=5)
         elif type == 3:
             return datetime.now() + timedelta(days=2)
+    books = Books.id
+    customers = Customers.id
 # REMEMBER TO CHECK HOW TO DO THIS WITHOUT A PRIMARY KEY!!!!!!
-    custID = Column(Integer, ForeignKey("books.id"),
+    custID = Column(Integer, ForeignKey("books"),
                     primary_key=True, nullable=False)
     bookID = Column(Integer, ForeignKey("customers.id"),
                     primary_key=True, nullable=False)

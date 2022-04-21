@@ -1,7 +1,5 @@
 from flask import Flask, render_template, url_for
-import books
-import customers
-import loans
+
 
 app = Flask(__name__)
 
@@ -11,7 +9,7 @@ def index():
 
 
 @app.route('/add')
-def index():
+def add():
     return render_template('add.html')
 
 
