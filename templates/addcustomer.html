@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Add Customer</title>
+{% endblock %}
+
+{% block body %}
+<h1>Please Add The Customer Information</h1>
+<div class="form">
+    <form action="/" method="POST">
+        <input type="text" name="id" id="id">
+        <input type="submit" value="Add ID">
+    </form>
+    <br>
+    <form action="/" method="POST">
+        <input type="text" name="name" id="name">
+        <input type="submit" value="Add Customer Name">
+    </form>
+    <br>
+    <form action="/" method="POST">
+        <input type="text" name="city" id="city">
+        <input type="submit" value="Add City">
+    </form>
+    <br>
+    <form action="/" method="POST">
+        <input type="text" name="age" id="age">
+        <input type="submit" value="Add Age">
+    </form>
+</div>
+{% endblock %}

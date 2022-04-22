@@ -14,7 +14,7 @@ class Customers(Base):
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(String, nullable=False)
     city = Column(String, nullable=False)
-    age = Column(String, nullable=False)
+    age = Column(Integer, nullable=False)
 
     def __repr__(self):
         return f"customers(id={self.id!r}, name={self.name!r}, city={self.city!r}, age={self.age!r})"
