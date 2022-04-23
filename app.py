@@ -52,7 +52,7 @@ def addAcustomer():
 
 
 @app.route('/addloan', methods=['POST', 'GET'])
-def addAcustomer():
+def addloan():
     if request.method == "POST":
         customer_ID = int(request.form['custID'])
         book_ID = int(request.form['bookID'])
