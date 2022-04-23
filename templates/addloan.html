@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Add Loan</title>
+{% endblock %}
+
+{% block body %}
+<h1>Please Add The Loan Information</h1>
+<form action="/" method="POST">
+    Customer ID <input type="text" name="custID" id="custID">
+    <br>
+    Book ID <input type="text" name="bookID" id="bookID">
+    <br>
+    <input type="submit" value="submit">
+</form>
+</div>
+{% endblock %}

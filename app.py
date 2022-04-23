@@ -51,5 +51,21 @@ def addAcustomer():
         return render_template('addcustomer.html')
 
 
+@app.route('/addloan', methods=['POST', 'GET'])
+def addAcustomer():
+    if request.method == "POST":
+        customer_ID = int(request.form['custID'])
+        book_ID = int(request.form['bookID'])
+        try:
+            loans.AddLoan(customer_ID,book_ID)
+            return redirect('/')
+
+        except:
+            return 'There was an issue adding your loan'
+
+    else:
+        return render_template('addloan.html')
+
+
 if __name__ == "__main__":
     app.run(debug=True)

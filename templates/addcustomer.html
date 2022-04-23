@@ -6,25 +6,16 @@
 
 {% block body %}
 <h1>Please Add The Customer Information</h1>
-<div class="form">
-    <form action="/" method="POST">
-        <input type="text" name="id" id="id">
-        <input type="submit" value="Add ID">
-    </form>
+<form action="/" method="POST">
+    ID <input type="text" name="id" id="id">
     <br>
-    <form action="/" method="POST">
-        <input type="text" name="name" id="name">
-        <input type="submit" value="Add Customer Name">
-    </form>
+    Name <input type="text" name="name" id="name">
     <br>
-    <form action="/" method="POST">
-        <input type="text" name="city" id="city">
-        <input type="submit" value="Add City">
-    </form>
+    City <input type="text" name="city" id="city">
     <br>
-    <form action="/" method="POST">
-        <input type="text" name="age" id="age">
-        <input type="submit" value="Add Age">
-    </form>
+    Age<input type="text" name="age" id="age">
+    <br>
+    <input type="submit" value="submit">
+</form>
 </div>
 {% endblock %}
