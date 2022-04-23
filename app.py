@@ -13,7 +13,13 @@ def index():
 
 @app.route('/showbook')
 def showbook():
-    return render_template('showbook.html')
+    book = books.Books
+    return render_template('showbook.html', book=book)
+
+
+@app.route('/delete/<int:id>')
+def deleteBook(id):
+    book_to_delete = books.Books.get_or_404(id)
 
 
 @app.route('/addbook', methods=['POST', 'GET'])
