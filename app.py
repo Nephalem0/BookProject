@@ -11,6 +11,11 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/showbook')
+def showbook():
+    return render_template('showbook.html')
+
+
 @app.route('/addbook', methods=['POST', 'GET'])
 def addAbook():
     if request.method == 'POST':
