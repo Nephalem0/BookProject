@@ -6,7 +6,7 @@ import loans
 app = Flask(__name__)
 
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/')
 def index():
     return render_template('index.html')
 
@@ -57,7 +57,7 @@ def addAcustomer():
         customer_ID = int(request.form['custID'])
         book_ID = int(request.form['bookID'])
         try:
-            loans.AddLoan(customer_ID,book_ID)
+            loans.AddLoan(customer_ID, book_ID)
             return redirect('/')
 
         except:
