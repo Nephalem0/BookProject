@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 engine = create_engine("sqlite:///books.db", echo=True, future=True)
 
+
 @app.route('/',  methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
@@ -19,11 +20,6 @@ def showbook():
     book = books.get_table_metadata(engine, books.Books)
     flash(book)
     return render_template('book.html')
-
-
-@app.route('/delete/<int:id>')
-def deleteBook(id):
-    book_to_delete = books.Books.get_or_404(id)
 
 
 @app.route('/addbook', methods=['POST', 'GET'])
