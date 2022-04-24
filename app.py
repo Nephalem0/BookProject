@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, flash
+from sqlalchemy.orm import Session
 import books
 import customers
 import loans
@@ -6,15 +7,16 @@ import loans
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/',  methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 
 
 @app.route('/showbook')
 def showbook():
-    book = books.Books()
-    return render_template('showbook.html', book=book)
+    book = Session.query(books.Books)
+    flash(book)
+    return render_template('showbook.html')
 
 
 @app.route('/delete/<int:id>')
