@@ -13,7 +13,7 @@ def index():
 
 @app.route('/showbook')
 def showbook():
-    book = books.Books
+    book = books.Books()
     return render_template('showbook.html', book=book)
 
 
