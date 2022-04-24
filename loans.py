@@ -2,6 +2,7 @@ from sqlalchemy import Column
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
 from sqlalchemy import DateTime
+from sqlalchemy import *
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import Session
@@ -48,3 +49,10 @@ def AddLoan(custID, bookID):
         )
         session.add_all([newloan])
         session.commit()
+
+
+def get_table_metadata(engine, table):
+    metadata = MetaData()
+    metadata.reflect(bind=engine, only=[table])
+    table_metadata = Table(table, metadata, autoload=True)
+    return table_metadata

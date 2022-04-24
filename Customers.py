@@ -1,6 +1,7 @@
 from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import String
+from sqlalchemy import *
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import Session
@@ -33,3 +34,10 @@ def AddCustomer(id, name, city, age):
         )
         session.add_all([newcustomer])
         session.commit()
+
+
+def get_table_metadata(engine, table):
+    metadata = MetaData()
+    metadata.reflect(bind=engine, only=[table])
+    table_metadata = Table(table, metadata, autoload=True)
+    return table_metadata

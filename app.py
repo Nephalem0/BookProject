@@ -14,11 +14,11 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/showbook')
+@app.route('/book')
 def showbook():
     book = books.get_table_metadata(engine, books.Books)
     flash(book)
-    return render_template('showbook.html')
+    return render_template('book.html')
 
 
 @app.route('/delete/<int:id>')
