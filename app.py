@@ -17,7 +17,7 @@ def index():
 
 @app.route('/book')
 def showbook():
-    book = books.get_table_metadata(engine, 'booklist')
+    book = books.get_table_metadata(engine, 'books')
     return render_template('book.html').format(book=book)
 
 

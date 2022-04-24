@@ -11,7 +11,7 @@ Base = declarative_base()
 
 
 class Books(Base):
-    __tablename__ = "booklist"
+    __tablename__ = "books"
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(String(30), nullable=False)
     author = Column(String, nullable=False)
