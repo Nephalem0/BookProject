@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, flash
+from flask import Flask, render_template, request, url_for, redirect
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 import books
@@ -17,9 +17,8 @@ def index():
 
 @app.route('/book')
 def showbook():
-    book = books.get_table_metadata(engine, books.Books)
-    flash(book)
-    return render_template('book.html')
+    book = books.get_table_metadata(engine, booklist)
+    return render_template('book.html').format(book=book)
 
 
 @app.route('/addbook', methods=['POST', 'GET'])
