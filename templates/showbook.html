@@ -6,6 +6,8 @@
 
 {% block body %}
 
-<ul class=flashes></ul>
+<div class="flashes">
+  {% for book in books.Books%}
+    {{ book }}
 
 {% endblock %}

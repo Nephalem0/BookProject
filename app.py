@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request, url_for, redirect, flash
 from sqlalchemy.orm import Session
+from sqlalchemy import create_engine
 import books
 import customers
 import loans
 
 app = Flask(__name__)
 
+engine = create_engine("sqlite:///books.db", echo=True, future=True)
 
 @app.route('/',  methods=['GET', 'POST'])
 def index():
@@ -14,7 +16,7 @@ def index():
 
 @app.route('/showbook')
 def showbook():
-    book = Session.query(books.Books)
+    book = books.get_table_metadata(engine, books.Books)
     flash(book)
     return render_template('showbook.html')
 
