@@ -21,6 +21,7 @@ def showbook():
     return render_template('book.html', book=book)
 
 
+
 @app.route('/addbook', methods=['POST', 'GET'])
 def addAbook():
     if request.method == 'POST':
