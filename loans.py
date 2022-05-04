@@ -23,12 +23,12 @@ class Loans(Base):
             return datetime.now() + timedelta(days=5)
         elif type == 3:
             return datetime.now() + timedelta(days=2)
-    books = Books.id
-    customers = Customers.id
+    bookID = Books.id
+    customerID = Customers.id
 # REMEMBER TO CHECK HOW TO DO THIS WITHOUT A PRIMARY KEY!!!!!!
-    custID = Column(Integer, ForeignKey(Books.id),
+    custID = Column(Integer, ForeignKey(bookID),
                     primary_key=True, nullable=False)
-    bookID = Column(Integer, ForeignKey(Customers.id),
+    bookID = Column(Integer, ForeignKey(customerID),
                     primary_key=True, nullable=False)
     loandtate = Column(DateTime, onupdate=datetime.now, nullable=False)
     returndate = Column(DateTime, BookSelect(Integer))
@@ -41,11 +41,11 @@ class Loans(Base):
 Base.metadata.create_all(engine)
 
 
-def AddLoan(custID, bookID):
+def AddLoan(cust_ID, book_ID):
     with Session(engine) as session:
         newloan = Loans(
-            custID=custID,
-            bookID=bookID
+            custID=cust_ID,
+            bookID=book_ID
         )
         session.add_all([newloan])
         session.commit()

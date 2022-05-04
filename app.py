@@ -4,6 +4,7 @@ from sqlalchemy import create_engine
 import books
 import customers
 import loans
+import loader
 
 app = Flask(__name__)
 
@@ -17,7 +18,7 @@ def index():
 
 @app.route('/book')
 def showbook():
-    book = books.get_table_metadata(engine, 'books')
+    book = loader.getdata(books.Books, request.form.get('name'))
     return render_template('book.html', book=book)
 
 
