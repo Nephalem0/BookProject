@@ -1,14 +1,24 @@
 from flask import Flask, render_template, request, url_for, redirect
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
+from datetime import datetime, timedelta
 from books import Books
 from customers import Customers
 from loans import Loans
 import loader
 
+
 app = Flask(__name__)
 
 engine = create_engine("sqlite:///books.db", echo=True, future=True)
+
+def BookSelect(type):
+    if type == 1:
+        return datetime.now() + timedelta(days=10)
+    elif type == 2:
+        return datetime.now() + timedelta(days=5)
+    elif type == 3:
+        return datetime.now() + timedelta(days=2)
 
 
 @app.route('/', methods=['GET', 'POST'])
