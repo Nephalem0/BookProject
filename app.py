@@ -23,17 +23,7 @@ def showbook(action):
         return render_template('book.html', action=action, books=loader.getdata(Books, request.form.get('name')))
     elif request.method == 'GET':
         loader.removeitem(Books, request.args.get('id'))
-    return render_template('book.html', action=action, God=loader.getdata(Books))
-
-
-@app.route('/customer', methods=['GET', 'POST'])
-@app.route('/customer/<string:action>', methods=['GET', 'POST'])
-def showcustomer(action):
-    if request.method == 'POST':
-        return render_template('customer.html', action=action, customers=loader.getdata(Customers, request.form.get('name')))
-    elif request.method == 'GET':
-        loader.removeitem(Customers, request.args.get('id'))
-    return render_template('customer.html', action=action, customer=loader.getdata(Customers))
+    return render_template('book.html', action=action, book=loader.getdata(Books))
 
 
 @app.route('/addbook', methods=['POST', 'GET'])
