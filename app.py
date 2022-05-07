@@ -16,9 +16,10 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/book', methods=['GET', 'POST'])
-def showbook():
-    if request.method == 'GET': loader.removerow(Books, request.args.get('rowid'))
+@app.route('/book', methods=['GET', 'POST'], defaults={'action':''})
+def showbook(action):
+    if action == 'search': return render_template('books.html', action = action, books = loader.getdata(Books, request.form.get('name')))
+    if request.method == 'GET': loader.removeitem(Books, request.args.get('id'))
     return render_template('book.html', book=loader.getdata(Books))
 
 
@@ -32,7 +33,7 @@ def addAbook():
     if request.method == 'POST':
         newbook = Books(id=request.form.get('id'), name=request.form.get('name'), author=request.form.get('author'),
                         year_published=request.form.get('year_published'), type=request.form.get('type'))
-        loader.addrow(newbook)
+        loader.additem(newbook)
         return redirect('/')
     else:
         return render_template('addbook.html')
@@ -43,7 +44,7 @@ def addAcustomer():
     if request.method == 'POST':
         newcustomer = Customers(id=request.form.get('id'), name=request.form.get('name'), city=request.form.get('city'),
                                 age=request.form.get('age'))
-        loader.addrow(newcustomer)
+        loader.additem(newcustomer)
         return redirect('/')
     else:
         return render_template('addcustomer.html')

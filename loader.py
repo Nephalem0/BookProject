@@ -20,15 +20,15 @@ def getdata(table, query = ''):
     return info
 
 
-def addrow(row):
+def additem(item):
     with mydb.session as session:
-        session.add(row)
+        session.add(item)
         session.commit()
 
 
-def removerow(table,rid):
+def removeitem(table,rid):
     with mydb.session as session:
-        session.query(table).filter(table.rowid == rid).delete()
+        session.query(table).filter(table.id == rid).delete()
         session.commit()
 
 def returnloan(loanid, date):
@@ -54,12 +54,12 @@ def isreturnlate(loanid):
 
 def loanedbook(bookid):
     with mydb.session as session:
-        session.query(Books).filter(Books.rowid == bookid).update({"isloaned": True})
+        session.query(Books).filter(Books.id == bookid).update({"isloaned": True})
         session.commit()
 
 def bookcheck(bookid):
     with mydb.session as session:
-        for book in session.query(Books).filter(Books.rowid == bookid):
+        for book in session.query(Books).filter(Books.id == bookid):
             if book.isloaned:
                 return False
             return True

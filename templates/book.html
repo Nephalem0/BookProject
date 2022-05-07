@@ -6,6 +6,14 @@
 
 {% block body %}
 
+{%if action == 'search'%}
+<form method="post">
+  <div>
+    <input type="text" name="name" placeholder="Book name" class="form-control" id="floatingInputValue">
+    <label for="floatingInputValue">Book name:</label>
+  </div>
+</form>
+{%endif%}
 <table>
   <td>Book ID</td>
   <td>Book name</td>
@@ -15,25 +23,25 @@
   <td>Delete?</td>
   {% for book in book %}
   <tr>
-      <td>
-        {{book.id}}
-      </td>
-      <td>
-        {{book.name}}
-      </td>
-      <td>
-        {{book.author}}
-      </td>
-      <td>
-        {{book.year_published}}
-      </td>
-      <td>
-        {{book.type}}
-      </td>
-      <td>
-        <a href="">Delete</a>
-      </td>
+    <td>
+      {{book.id}}
+    </td>
+    <td>
+      {{book.name}}
+    </td>
+    <td>
+      {{book.author}}
+    </td>
+    <td>
+      {{book.year_published}}
+    </td>
+    <td>
+      {{book.type}}
+    </td>
+    <td>
+      <a href="{{url_for('showbook', id = book.id)}}">Delete</a>
+    </td>
   </tr>
   {% endfor %}
-  </table>
+</table>
 {% endblock %}
