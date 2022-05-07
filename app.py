@@ -18,9 +18,10 @@ def index():
 
 @app.route('/book', methods=['GET', 'POST'], defaults={'action':''})
 def showbook(action):
-    if action == 'search': return render_template('books.html', action = action, books = loader.getdata(Books, request.form.get('name')))
-    if request.method == 'GET': loader.removeitem(Books, request.args.get('id'))
-    return render_template('book.html', book=loader.getdata(Books))
+    if request.method == 'POST':
+        if action == 'search': return render_template('book.html', action = action, books = loader.getdata(Books, request.form.get('name')))
+    elif request.method == 'GET': loader.removeitem(Books, request.args.get('id'))
+    return render_template('book.html',action = action ,book=loader.getdata(Books))
 
 
 @app.route('/customer', methods=['GET', 'POST'])

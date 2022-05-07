@@ -6,14 +6,13 @@
 
 {% block body %}
 
-{%if action == 'search'%}
 <form method="post">
-  <div>
-    <input type="text" name="name" placeholder="Book name" class="form-control" id="floatingInputValue">
-    <label for="floatingInputValue">Book name:</label>
+  <div class="form-floating margined">
+      <input type="text" name="name" placeholder="Book name" class="form-control" id="floatingInputValue">
   </div>
 </form>
-{%endif%}
+
+
 <table>
   <td>Book ID</td>
   <td>Book name</td>
