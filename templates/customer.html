@@ -34,7 +34,7 @@
       {{customer.age}}
     </td>
     <td>
-      <a href="">Delete</a>
+      <a href="{{url_for('showcustomer', id = customer.id)}}">Delete</a>
     </td>
   </tr>
   {% endfor %}

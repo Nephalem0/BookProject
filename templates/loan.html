@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>View Customers</title>
+{% endblock %}
+
+{% block body %}
+
+
+<table>
+  <td>Book ID</td>
+  <td>Customer ID</td>
+  <td>loandtate</td>
+  <td>returndate</td>
+  <td>Return??</td>
+  {% for loan in loan %}
+  <tr>
+    <td>
+      {{customer.id}}
+    </td>
+    <td>
+      {{customer.name}}
+    </td>
+    <td>
+      {{customer.city}}
+    </td>
+    <td>
+      {{customer.age}}
+    </td>
+    <td>
+      <a href="{{url_for('showcustomer', id = customer.id)}}">Return</a>
+    </td>
+  </tr>
+  {% endfor %}
+  {% endblock %}

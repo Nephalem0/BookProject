@@ -22,5 +22,5 @@ class Loans(Base):
     loandtate = Column(DateTime, onupdate=datetime.now, nullable=False)
     returndate = Column(DateTime, nullable=False)
 
-    customername = relationship("Customer", foreign_keys = custID)
-    bookname = relationship("Book", foreign_keys = bookID)
+    customername = relationship("Customers", foreign_keys = custID)
+    bookname = relationship("Books", foreign_keys = bookID)

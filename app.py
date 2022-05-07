@@ -68,9 +68,21 @@ def addAcustomer():
         return render_template('addcustomer.html')
 
 
-@app.route('loan' methods = ['POST', 'GET'])
-def addAloan():
-    if request
+@app.route('/loan', methods = ['POST', 'GET'])
+def showloan(action):
+    if request.method == 'GET':
+        if loader.bookcheck(request.args.get('bookid')):
+            newloan = Loans(custID = request.args.get('customerid'), bookID = request.args.get('bookid'), loan_date = datetime.now().date())
+            loader.additem(newloan)
+            loader.loanedbook(request.args.get('bookid'))
+    elif request.method == 'POST':
+        loanid = request.form.get('loanid')
+        returndate = datetime.strptime(request.form['returndate'],'%Y-%m-%d')
+        loader.returnloan(loanid, returndate)
+        loader.isreturnlate(loanid)
+    if action == 'late':
+        return render_template('loan.html', loan = loader.getdata(Loans, 'late'))
+    return render_template('loan.html', loan = loader.getdata(Loans))
 
 
 if __name__ == "__main__":
