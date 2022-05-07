@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>View Books</title>
+<title>View Customers</title>
 {% endblock %}
 
 {% block body %}
@@ -13,35 +13,29 @@
   </div>
 </form>
 
-
 <table>
-  <td>Book ID</td>
-  <td>Book name</td>
-  <td>Book Author</td>
-  <td>Year Published</td>
-  <td>Book Type</td>
+  <td>Customer ID</td>
+  <td>Customer name</td>
+  <td>Customer city</td>
+  <td>Customer age</td>
   <td>Delete?</td>
-  {% for book in book %}
+  {% for customer in customer %}
   <tr>
     <td>
-      {{book.id}}
+      {{customer.id}}
     </td>
     <td>
-      {{book.name}}
+      {{customer.name}}
     </td>
     <td>
-      {{book.author}}
+      {{customer.city}}
     </td>
     <td>
-      {{book.year_published}}
+      {{customer.age}}
     </td>
     <td>
-      {{book.type}}
-    </td>
-    <td>
-      <a href="{{url_for('showbook', id = book.id)}}">Delete</a>
+      <a href="">Delete</a>
     </td>
   </tr>
   {% endfor %}
-</table>
-{% endblock %}
+  {% endblock %}
