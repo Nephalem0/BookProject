@@ -11,17 +11,17 @@ app = Flask(__name__)
 engine = create_engine("sqlite:///books.db", echo=True, future=True)
 
 
-@app.route('/',  methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 
 
-@app.route('/book')
+@app.route('/book', methods=['GET', 'POST'])
 def showbook():
     return render_template('book.html', book=loader.getdata(Books))
 
 
-@app.route('/customer')
+@app.route('/customer', methods=['GET', 'POST'])
 def showcustomer():
     return render_template('book.html', customer=loader.getdata(Customers))
 
