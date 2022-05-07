@@ -17,14 +17,13 @@ def index():
 
 
 @app.route('/book', methods=['GET', 'POST'], defaults={'action': ''})
-@app.route('/book/<string:action>', methods=['GET', 'POST'])
 def showbook(action):
     if request.method == 'POST':
-        return render_template('book.html', action=action, books=loader.getdata(Books, request.form.get('name')))
+            name = request.form.get('name')
+            return render_template('book.html', action=action, book=loader.getdata(Books, name=name))
     elif request.method == 'GET':
         loader.removeitem(Books, request.args.get('id'))
     return render_template('book.html', action=action, book=loader.getdata(Books))
-
 
 @app.route('/addbook', methods=['POST', 'GET'])
 def addAbook():

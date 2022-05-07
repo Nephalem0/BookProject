@@ -7,16 +7,16 @@ from loans import Loans
 mydb = mydatabase.MyDB()
 
 
-def getdata(table, query = ''):
-    if query == '':
+def getdata(table, name = ''):
+    if name == '':
         if table == Loans:
             info = mydb.session.query(table).order_by(table.loan_date).all()
-        else:    
+        else:
             info = mydb.session.query(table).order_by(table.name).all()
     elif table == Loans:
         info = mydb.session.query(table).filter(table.islate == True).all()
     else:
-        info = mydb.session.query(table).filter(table.name.like(f'%{query}%')).all()
+        info = mydb.session.query(table).filter(table.name.like(f'%{name}%')).all()
     return info
 
 
