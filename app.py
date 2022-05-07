@@ -19,11 +19,12 @@ def index():
 @app.route('/book', methods=['GET', 'POST'], defaults={'action': ''})
 def showbook(action):
     if request.method == 'POST':
-            name = request.form.get('name')
-            return render_template('book.html', action=action, book=loader.getdata(Books, name=name))
+        name = request.form.get('name')
+        return render_template('book.html', action=action, book=loader.getdata(Books, name=name))
     elif request.method == 'GET':
         loader.removeitem(Books, request.args.get('id'))
     return render_template('book.html', action=action, book=loader.getdata(Books))
+
 
 @app.route('/addbook', methods=['POST', 'GET'])
 def addAbook():
@@ -34,6 +35,16 @@ def addAbook():
         return redirect('/')
     else:
         return render_template('addbook.html')
+
+
+@app.route('/customer', methods=['GET', 'POST'], defaults={'action': ''})
+def showcustomer(action):
+    if request.method == 'POST':
+        name = request.form.get('name')
+        return render_template('customer.html', action=action, customer=loader.getdata(Customers, name=name))
+    elif request.method == 'GET':
+        loader.removeitem(Customers, request.args.get('id'))
+    return render_template('customer.html', action=action, customer=loader.getdata(Customers))
 
 
 @app.route('/addcustomer', methods=['POST', 'GET'])

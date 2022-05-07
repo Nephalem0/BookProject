@@ -14,14 +14,6 @@ Base = declarative_base()
 
 class Loans(Base):
     __tablename__ = "loans"
-
-    def BookSelect(type):
-        if type == 1:
-            return datetime.now() + timedelta(days=10)
-        elif type == 2:
-            return datetime.now() + timedelta(days=5)
-        elif type == 3:
-            return datetime.now() + timedelta(days=2)
     bookID = Books.id
     customerID = Customers.id
     custID = Column(Integer, ForeignKey(bookID),
@@ -29,4 +21,4 @@ class Loans(Base):
     bookID = Column(Integer, ForeignKey(customerID),
                     primary_key=True, nullable=False)
     loandtate = Column(DateTime, onupdate=datetime.now, nullable=False)
-    returndate = Column(DateTime, BookSelect(Integer))
+    returndate = Column(DateTime, nullable=False)
