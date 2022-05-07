@@ -68,5 +68,10 @@ def addAcustomer():
         return render_template('addcustomer.html')
 
 
+@app.route('loan' methods = ['POST', 'GET'])
+def addAloan():
+    if request
+
+
 if __name__ == "__main__":
     app.run(debug=True)
