@@ -5,7 +5,7 @@ from books import Books
 from customers import Customers
 from loans import Loans
 import loader
- 
+
 app = Flask(__name__)
 
 engine = create_engine("sqlite:///books.db", echo=True, future=True)
@@ -18,7 +18,12 @@ def index():
 
 @app.route('/book')
 def showbook():
-    return render_template('book.html', book = loader.getdata(Books))
+    return render_template('book.html', book=loader.getdata(Books))
+
+
+@app.route('/customer')
+def showcustomer():
+    return render_template('book.html', customer=loader.getdata(Customers))
 
 
 @app.route('/addbook', methods=['POST', 'GET'])
@@ -32,21 +37,16 @@ def addAbook():
         return render_template('addbook.html')
 
 
+@app.route('/addcustomer', methods=['POST', 'GET'])
+def addAcustomer():
+    if request.method == 'POST':
+        newcustomer = Customers(id=request.form.get('id'), name=request.form.get('name'), city=request.form.get('city'),
+                                age=request.form.get('age'))
+        loader.addrow(newcustomer)
+        return redirect('/')
+    else:
+        return render_template('addcustomer.html')
+
+
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-        #book_id = int(request.form['id'])
-        #book_name = str(request.form['name'])
-        #book_author = str(request.form['author'])
-        #book_year_published = int(request.form['year_published'])
-        #book_type = int(request.form['type'])
-        # try:
-        #    newbook = books.Books(book_id, book_name, book_author,
-        #                        book_year_published, book_type)
-        #    loader.addrow(newbook)
-        #    return redirect('/')
-
-        # except:
-        #    return 'There was an issue adding your book'

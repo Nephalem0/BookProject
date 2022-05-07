@@ -7,6 +7,12 @@
 {% block body %}
 
 <table>
+  <td>Book ID</td>
+  <td>Book name</td>
+  <td>Book Author</td>
+  <td>Year Published</td>
+  <td>Book Type</td>
+  <td>Delete?</td>
   {% for book in book %}
   <tr>
       <td>
@@ -23,6 +29,9 @@
       </td>
       <td>
         {{book.type}}
+      </td>
+      <td>
+        <a href="">Delete</a>
       </td>
   </tr>
   {% endfor %}

@@ -1,10 +1,8 @@
 from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import String
-from sqlalchemy import *
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import Session
 engine = create_engine("sqlite:///books.db", echo=True, future=True)
 
 Base = declarative_base()
@@ -16,28 +14,3 @@ class Customers(Base):
     name = Column(String, nullable=False)
     city = Column(String, nullable=False)
     age = Column(Integer, nullable=False)
-
-    def __repr__(self):
-        return f"customers(id={self.id!r}, name={self.name!r}, city={self.city!r}, age={self.age!r})"
-
-
-Base.metadata.create_all(engine)
-
-
-def AddCustomer(id, name, city, age):
-    with Session(engine) as session:
-        newcustomer = Customers(
-            id=id,
-            name=name,
-            city=city,
-            age=age,
-        )
-        session.add_all([newcustomer])
-        session.commit()
-
-
-def get_table_metadata(engine, table):
-    metadata = MetaData()
-    metadata.reflect(bind=engine, only=[table])
-    table_metadata = Table(table, metadata, autoload=True)
-    return table_metadata
