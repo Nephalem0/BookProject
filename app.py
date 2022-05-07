@@ -18,6 +18,7 @@ def index():
 
 @app.route('/book', methods=['GET', 'POST'])
 def showbook():
+    if request.method == 'GET': loader.removerow(Books, request.args.get('rowid'))
     return render_template('book.html', book=loader.getdata(Books))
 
 
