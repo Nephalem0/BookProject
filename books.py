@@ -20,9 +20,6 @@ class Books(Base):
     year_published = Column(Integer, nullable=False)
     type = Column(Integer(), nullable=False)
 
-    def __repr__(self):
-        return f"books(id={self.id!r}, name={self.name!r}, author={self.author!r}, year_published={self.year_published!r}, type={self.type!r})"
-
 
 Base.metadata.create_all(engine)
 
@@ -45,4 +42,3 @@ def get_table_metadata(engine, table):
     metadata.reflect(bind=engine, only=[table])
     table_metadata = Table(table, metadata, autoload=True)
     return table_metadata
-

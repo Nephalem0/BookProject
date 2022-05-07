@@ -7,26 +7,22 @@
 {% block body %}
 
 <table>
-  {% for item in book %}
+  {% for book in book %}
   <tr>
       <td>
-        {{item.id}}
-        {{ item.type |safe }}
+        {{book.id}}
       </td>
       <td>
-        {{item.name}}
-        {{ item.type |safe }}
+        {{book.name}}
       </td>
       <td>
-        {{item.author}}
-        {{ item.type |safe }}
+        {{book.author}}
       </td>
       <td>
-        {{item.year_published}}
-        {{ item.type |safe }}</td>
+        {{book.year_published}}
+      </td>
       <td>
-        {{item.type}}
-        {{ item.type |safe }}
+        {{book.type}}
       </td>
   </tr>
   {% endfor %}
