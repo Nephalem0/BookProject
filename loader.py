@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import datetime, timedelta
 import mydatabase
 from books import Books
 from loans import Loans
@@ -37,8 +37,12 @@ def removeitemloan(table, ridCust, ridBook):
         session.commit()
 
 
-#def isreturnlate(loanid):
-    #with mydb.session as session:
+def isreturnlate():
+    with mydb.session as session:
+        for row in session.query(Loans).all():
+            if row.returndate > datetime.now():
+                row.islate = True
+        return session.query(Loans).filter(Loans.islate).all()
 
 
 

@@ -20,6 +20,7 @@ class Loans(db.Base):
                     primary_key=True, nullable=False)
     loandate = Column(DateTime, onupdate=datetime.now, default=datetime.now)
     returndate = Column(DateTime, nullable=False)
+    islate = False
 
     customername = relationship("Customers", foreign_keys=custID)
     bookname = relationship("Books", foreign_keys=bookID)

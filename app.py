@@ -93,10 +93,10 @@ def showloan():
 def showlateloan():
     if request.method == 'POST':
         name = request.form.get('name')
-        return render_template('loan.html', loan=loader.getdata(Loans, name=name))
+        return render_template('loan.html', loan=loader.isreturnlate())
     elif request.method == 'GET':
         loader.removeitemloan(Loans, request.args.get('bookID'), request.args.get('custID'))
-    return render_template('loan.html', loan=loader.getdata(Loans))
+    return render_template('loan.html', loan=loader.isreturnlate())
 
 if __name__ == "__main__":
     app.run(debug=True)
