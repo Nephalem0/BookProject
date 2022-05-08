@@ -42,9 +42,12 @@ def showbook(action):
 @app.route('/addbook', methods=['POST', 'GET'])
 def addAbook():
     if request.method == 'POST':
-        newbook = Books(id=request.form.get('id'), name=request.form.get('name'), author=request.form.get('author'),
-                        year_published=request.form.get('year_published'), type=request.form.get('type'))
-        loader.additem(newbook)
+        try:
+            newbook = Books(id=request.form.get('id'), name=request.form.get('name'), author=request.form.get('author'),
+                            year_published=request.form.get('year_published'), type=request.form.get('type'))
+            loader.additem(newbook)
+        except:
+            return "Please try a different ID"
         return redirect('/')
     else:
         return render_template('addbook.html')
@@ -63,9 +66,12 @@ def showcustomer(action):
 @app.route('/addcustomer', methods=['POST', 'GET'])
 def addAcustomer():
     if request.method == 'POST':
-        newcustomer = Customers(id=request.form.get('id'), name=request.form.get('name'), city=request.form.get('city'),
-                                age=request.form.get('age'))
-        loader.additem(newcustomer)
+        try:
+            newcustomer = Customers(id=request.form.get('id'), name=request.form.get('name'), city=request.form.get('city'),
+                                    age=request.form.get('age'))
+            loader.additem(newcustomer)
+        except:
+            return "Please try a different ID"
         return redirect('/')
     else:
         return render_template('addcustomer.html')
@@ -73,9 +79,12 @@ def addAcustomer():
 @app.route('/addloan', methods=['POST', 'GET'])
 def addAloan():
     if request.method == 'POST':
-        returndate = BookSelect(loader.getBookFromId(request.form.get('bookID')).type)
-        newloan = Loans(custID=request.form.get('custID'), bookID=request.form.get('bookID'),loandate=datetime.now(), returndate=returndate)
-        loader.additem(newloan)
+        try:
+            returndate = BookSelect(loader.getBookFromId(request.form.get('bookID')).type)
+            newloan = Loans(custID=request.form.get('custID'), bookID=request.form.get('bookID'),loandate=datetime.now(), returndate=returndate)
+            loader.additem(newloan)
+        except:
+            return "That loan is already taken"
         return redirect('/')
     else:
         return render_template('addloan.html')
