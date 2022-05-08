@@ -9,18 +9,17 @@ from datetime import datetime
 from sqlalchemy.orm import relationship
 from books import Books
 from customers import Customers
-engine = create_engine("sqlite:///books.db", echo=True, future=True)
+import db
 
-Base = declarative_base()
 
-class Loans(Base):
+class Loans(db.Base):
     __tablename__ = "loans"
-    custID = Column(Integer, ForeignKey(Books.id),
+    custID = Column(Integer, ForeignKey(Customers.id),
                     primary_key=True, nullable=False)
-    bookID = Column(Integer, ForeignKey(Customers.id),
+    bookID = Column(Integer, ForeignKey(Books.id),
                     primary_key=True, nullable=False)
-    loandtate = Column(DateTime, onupdate=datetime.now, nullable=False)
+    loandate = Column(DateTime, onupdate=datetime.now, default=datetime.now)
     returndate = Column(DateTime, nullable=False)
 
-    customername = relationship("Customers", foreign_keys = custID)
-    bookname = relationship("Books", foreign_keys = bookID)
+    customername = relationship("Customers", foreign_keys=custID)
+    bookname = relationship("Books", foreign_keys=bookID)

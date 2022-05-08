@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>View late loans/return late loans</title>
+{% endblock %}
+
+{% block body %}
+
+
+<table>
+  <td>Customer ID</td>
+  <td>Book ID</td>
+  <td>loandtate</td>
+  <td>returndate</td>
+  <td>Return??</td>
+  {% for loan in loan %}
+  <tr>
+    <td>
+      {{loan.custID}}
+    </td>
+    <td>
+      {{loan.bookID}}
+    </td>
+    <td>
+      {{loan.loandate}}
+    </td>
+    <td>
+      {{loan.returndate}}
+    </td>
+    <td>
+      <a href="{{url_for('showloan', bookID = loan.bookID, custID = loan.custID)}}">Return</a>
+    </td>
+  </tr>
+  {% endfor %}
+  </table>
+  {% endblock %}

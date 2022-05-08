@@ -3,18 +3,17 @@ import mydatabase
 from books import Books
 from loans import Loans
 
-
 mydb = mydatabase.MyDB()
 
 
-def getdata(table, name = ''):
+def getdata(table, name=''):
     if name == '':
         if table == Loans:
-            info = mydb.session.query(table).order_by(table.loan_date).all()
+            info = mydb.session.query(table).order_by(table.loandate).all()
         else:
             info = mydb.session.query(table).order_by(table.name).all()
     elif table == Loans:
-        info = mydb.session.query(table).filter(table.islate == True).all()
+        info = mydb.session.query(table).filter(table.islate).all()
     else:
         info = mydb.session.query(table).filter(table.name.like(f'%{name}%')).all()
     return info
@@ -26,40 +25,23 @@ def additem(item):
         session.commit()
 
 
-def removeitem(table,rid):
+def removeitem(table, rid):
     with mydb.session as session:
         session.query(table).filter(table.id == rid).delete()
         session.commit()
 
-def returnloan(loanid, date):
+
+def removeitemloan(table, ridCust, ridBook):
     with mydb.session as session:
-        session.query(Loans).filter(Loans.loan_id == loanid).update({"return_date": date})
-        for loan in session.query(Loans).filter(Loans.loan_id == loanid).all():
-            loan.bookname.isloaned = False
+        session.query(table).filter(table.bookID == ridBook, table.custID == ridCust).delete()
         session.commit()
 
-def isreturnlate(loanid):
-    with mydb.session as session:
-        for l in session.query(Loans).filter(Loans.loan_id == loanid).all():
-            if l.bookname.book_type == 1:
-                if l.return_date - l.loan_date < timedelta(days = 10):
-                    session.query(Loans).filter(Loans.loan_id == loanid).update({"islate": False})
-            elif l.bookname.book_type == 2:
-                if l.return_date - l.loan_date < timedelta(days = 5):
-                    session.query(Loans).filter(Loans.loan_id == loanid).update({"islate": False})
-            else:
-                if l.return_date - l.loan_date < timedelta(days = 2):
-                    session.query(Loans).filter(Loans.loan_id == loanid).update({"islate": False})
-        session.commit()
 
-def loanedbook(bookid):
-    with mydb.session as session:
-        session.query(Books).filter(Books.id == bookid).update({"isloaned": True})
-        session.commit()
+#def isreturnlate(loanid):
+    #with mydb.session as session:
 
-def bookcheck(bookid):
+
+
+def getBookFromId(bookid):
     with mydb.session as session:
-        for book in session.query(Books).filter(Books.id == bookid):
-            if book.isloaned:
-                return False
-            return True
+        return session.query(Books).get(bookid)

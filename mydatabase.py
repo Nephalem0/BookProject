@@ -1,4 +1,7 @@
 from sqlalchemy import create_engine
+from customers import Customers
+from books import Books
+from loans import Loans
 import db
 
 
