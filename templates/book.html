@@ -7,13 +7,14 @@
 {% block body %}
 
 <form method="POST">
-  <div class="form-floating margined">
-      <input type="text" name="name" placeholder="Book name" class="form-control" id="floatingInputValue">
+  <div class="input-group mb-3">
+    <input type="text" name="name" placeholder="Book name" class="form-control" id="floatingInputValue">
+    <input class="btn btn-info" type="submit" value="Search">
   </div>
 </form>
 
 
-<table class="table-dark">
+<table class="table table-striped">
   <td>Book ID</td>
   <td>Book name</td>
   <td>Book Author</td>
@@ -38,7 +39,7 @@
       {{book.type}}
     </td>
     <td>
-      <a href="{{url_for('showbook', id = book.id)}}">Delete</a>
+      <a href="{{url_for('showbook', id = book.id)}}" class="btn btn-danger">Delete</a>
     </td>
   </tr>
   {% endfor %}

@@ -7,7 +7,7 @@
 {% block body %}
 
 
-<table>
+<table class="table table-striped">
   <td>Customer ID</td>
   <td>Book ID</td>
   <td>loandtate</td>
@@ -28,7 +28,7 @@
       {{loan.returndate}}
     </td>
     <td>
-      <a href="{{url_for('showloan', bookID = loan.bookID, custID = loan.custID)}}">Return</a>
+      <a href="{{url_for('showloan', bookID = loan.bookID, custID = loan.custID)}}" class="btn btn-danger">Return</a>
     </td>
   </tr>
   {% endfor %}
